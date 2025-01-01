@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { getInitials } from "../../utils/Helper"
 
 const ProfileInfo = ({onLogout}) => {
@@ -17,5 +18,9 @@ const ProfileInfo = ({onLogout}) => {
     </div>
   )
 }
+
+ProfileInfo.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
 
 export default ProfileInfo
