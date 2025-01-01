@@ -1,10 +1,23 @@
-
+import Navbar from "../../components/Navbar/Navbar"
 
 const SignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    // SignUp API call  
+  };
+  
   return (
-    <div>
-      SignUp
+    <>
+
+    <Navbar />
+    <div className="flex items-center justify-center mt-28">
+      <div className="w-96 border rounded bg-white px-7 py-10">
+        <form onSubmit={handleSignUp}>
+          <h4 className="text-2xl mb-7">SignUp</h4>
+        </form>
+      </div>
     </div>
+    </>
   )
 }
 
