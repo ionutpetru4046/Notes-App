@@ -13,7 +13,7 @@ const NoteCard = ({
   onPinNote,
 }) => {
   return (
-    <div>
+    <div className=''>
       <div className="">
         <div>
            <h6 className="text-sm font-medium">{title}</h6>
@@ -21,10 +21,26 @@ const NoteCard = ({
           </div>
 
         <MdOutlinePushPin className="" onClick={onPinNote} />
-
       </div>
 
        <p className=''>{content?.slice(0,60)}</p>
+
+      <div className="">
+        <div className='text-xs text-slate-500'>{tags}</div>
+
+        <div className='flex items-center gap-2'>
+          <MdCreate 
+            className='icon-btn hover:text-green-600' 
+            onClick={onEdit}
+            />
+
+            <MdDelete 
+              className='icon-btn hover:text-red-500'
+              onClick={onDelete}
+              />  
+
+        </div>
+      </div>
     </div>
   );
 };
