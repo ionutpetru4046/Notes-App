@@ -1,6 +1,12 @@
 import TagInput from '../../components/Input/TagInput';
+import { useState } from 'react';
 
 const AddEditNotes = () => {
+
+    const [title, setTitle] = useState();
+    const [content, setContent] = useState();
+    const [tags, setTags] = useState([]);
+
   return (
     <div>
         <div className="flex flex-col gap-2">
@@ -9,6 +15,8 @@ const AddEditNotes = () => {
                 type="text"
                 className="text-2xl text-slate-950 outline-none"
                 placeholder="Go to Gym at 6 PM"
+                value={title}
+                onChange={({ target }) => setTitle(target.value)}
             />
         </div>
 
