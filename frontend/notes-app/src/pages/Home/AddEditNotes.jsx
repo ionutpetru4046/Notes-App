@@ -27,12 +27,14 @@ const AddEditNotes = () => {
                 className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded"
                 placeholder="Content"
                 rows={10}
+                value={content}
+                onChange={({ target }) => setContent(target.value)}
                 />
         </div>
 
         <div className="mt-3">
             <label className="input-label">TAGS</label>
-            <TagInput />
+            <TagInput tags={tags} setTags={setTags} />
         </div>
 
         <button className="btn-primary font-medium mt-5 p-3" onClick={() => {}}>

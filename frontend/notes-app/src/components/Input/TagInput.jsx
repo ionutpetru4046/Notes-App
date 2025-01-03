@@ -34,7 +34,7 @@ const TagInput = ({ tags, setTags }) => {
             {tags.map((tag, index) => (
                 <span key={index} className=''>
                     # {tag}
-                <button onClick={() => handleRemoveTag(tag)}>
+                    <button onClick={() => handleRemoveTag(tag)}>
                     <MdClose className='' />
                 </button>
                 </span>
