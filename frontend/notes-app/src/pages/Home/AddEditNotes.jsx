@@ -3,10 +3,46 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MdClose } from 'react-icons/md';
 
-const AddEditNotes = ({ onClose }) => {    
+const AddEditNotes = ({ type, onClose }) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState([]);
+
+    const [error, setError] = useState(null);
+
+    // Add Note
+    const addNewNote = async () => {
+
+    };
+    AddEditNotes.propTypes = {
+        type: PropTypes.string.isRequired,
+        onClose: PropTypes.func.isRequired,
+    };
+
+    // Edit Note
+    const editNote = async () => {
+
+    };
+
+    const handleAddNote = () => {
+        if (!title) {
+            setError("Please enter the title");
+            return;
+        }
+
+        if (!content) {
+            setError("Please enter the content");
+            return;
+        }
+
+        setError("");
+
+        if (type === "edit") {
+            editNote()
+        } else {
+            addNewNote()
+        }
+    }
 
   return (
     <div className="relative">
@@ -45,7 +81,9 @@ const AddEditNotes = ({ onClose }) => {
             <TagInput tags={tags} setTags={setTags} />
         </div>
 
-        <button className="btn-primary font-medium mt-5 p-3" onClick={() => {}}>
+        {error && <p className="text-red-500 text-sx pt-4">{error}</p>}
+
+        <button className="btn-primary font-medium mt-5 p-3" onClick={ handleAddNote}>
             ADD
         </button>
     </div>
