@@ -1,10 +1,9 @@
 import TagInput from '../../components/Input/TagInput';
 import { useState } from 'react';
 
-const AddEditNotes = () => {
-
-    const [title, setTitle] = useState();
-    const [content, setContent] = useState();
+const AddEditNotes = () => {    
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
     const [tags, setTags] = useState([]);
 
   return (
@@ -14,7 +13,7 @@ const AddEditNotes = () => {
             <input 
                 type="text"
                 className="text-2xl text-slate-950 outline-none"
-                placeholder="Go to Gym at 6 PM"
+                placeholder="Go to Gym at 5 PM"
                 value={title}
                 onChange={({ target }) => setTitle(target.value)}
             />

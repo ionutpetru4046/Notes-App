@@ -11,7 +11,7 @@ const TagInput = ({ tags, setTags }) => {
     };
 
     const addNewTag = () => {
-        if (inputValue.trim() === "") {
+        if (inputValue.trim() !== "") {
             setTags([...tags, inputValue.trim()]);
             setInputValue("");
         }
@@ -51,7 +51,8 @@ const TagInput = ({ tags, setTags }) => {
             onKeyDown={handleKeyDown}
             />
 
-            <button className="w-8 h-8 flex items-center justify-center rounded border border-blue-700 hover:bg-blue-700" 
+            <button 
+            className="w-8 h-8 flex items-center justify-center rounded border border-blue-700 hover:bg-blue-700" 
             onClick={() => {
                 addNewTag();
             }}
@@ -62,6 +63,7 @@ const TagInput = ({ tags, setTags }) => {
     </div>
   )
 }
+
 TagInput.propTypes = {
     tags: PropTypes.array.isRequired,
     setTags: PropTypes.func.isRequired,
