@@ -120,6 +120,10 @@ app.post("login", async (req, res) => {
 
 // Add Note API
 
+app.post("/add-note", authenticateToken, async (req, res) => {
+    
+});
+
 app.listen(8000);
 
 module.exports = app;
