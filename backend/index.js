@@ -27,6 +27,8 @@ app.get("/", (req, res) => {
     res.json({ data: "Hello from express" });
 });
 
+// Backend Ready
+
 // Create Account API
 app.post("/create-account", async (req, res) => {   
 
@@ -77,7 +79,7 @@ app.post("/create-account", async (req, res) => {
 });
 
 // Login API
-app.post("login", async (req, res) => {
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email) {
@@ -119,6 +121,26 @@ app.post("login", async (req, res) => {
     }
 });
 
+// Get USer
+app.get("/get-user", authenticateToken, async (req, res) => {
+    const { user } = req.user;
+
+    const isUser = await User.findOne({ _id: user._id });
+
+    if (!isUser) {
+        return res.sendStatus(401);
+    }
+
+    return res.json({ 
+        user: {
+            fullName: isUser.fullName,
+            email: isUser.email,
+            _id: isUser._id,
+            createdOn: isUser.createdOn,
+        }, 
+            message: "", 
+    });
+});
 // Add Note API
 
 app.post("/add-note", authenticateToken, async (req, res) => {
@@ -228,7 +250,25 @@ app.delete("/delete-note/:noteId", authenticateToken, async (req, res) => {
 
 // Update isPinned Value API
 app.put("update-note-pinned/:noteId", authenticateToken, async (req, res) => {
+    const noteId = req.params.noteId;
+    const { isPinned } = req.body;
+    const { user } = req.user;
 
+    try {
+        const note = await Note.findOne({ _id: noteId, userId: user.id });
+
+        if (!note) {
+            return res.status(404).json({ error: true, message: "Note not found" });
+        }
+
+        note.isPinned = isPinned;
+
+        await note.save();
+
+        return res.json({ error: false, note, message: "Note Updated Successfully" });
+    } catch(error) {
+        return res.status(500).json({ error: true, message: "Internal Server Error" });
+    }
 });
 
 app.listen(8000);
