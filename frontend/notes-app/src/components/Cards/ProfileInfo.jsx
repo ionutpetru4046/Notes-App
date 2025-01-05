@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { getInitials } from "../../utils/Helper"
+import { getInitials } from "../../utils/Helper";
 
 const ProfileInfo = ({onLogout}) => {
   return (
