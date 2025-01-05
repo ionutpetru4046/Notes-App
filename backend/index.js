@@ -206,6 +206,11 @@ app.get("/get-all-notes/", authenticateToken, async (req, res) => {
     }
 });
 
+//Delete Note API
+app.delete("/delete-note/:noteId", authenticateToken, async (req, res) => {
+
+});
+
 app.listen(8000);
 
 module.exports = app;
