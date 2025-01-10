@@ -1,14 +1,16 @@
 import PasswordInput from "../../components/Input/PasswordInput";
 import Navbar from "../../components/Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { validateEmail } from "../../utils/Helper";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
-  const [password, setPassword,] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +28,26 @@ const Login = () => {
     setError("");
 
     //Login API call
+
+    try {
+      const response = await axiosInstance.post("/login", {
+        email: email,
+        password: password,
+      });
+
+      // Handle Successful login response
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken)
+        navigate('/dashboard')
+      } 
+    } catch (error) {
+      // Handle Login error
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Login failed. Please check your credentials and try again.");       
+      }
+    }
   };
 
   return (
